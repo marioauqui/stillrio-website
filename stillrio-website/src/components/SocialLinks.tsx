@@ -30,12 +30,12 @@ const socialLinks = [
 
 export default function SocialLinks() {
   return (
-    <section id="social" className="bg-stone-50 px-6 py-20 dark:bg-stone-900">
+    <section id="social" className="bg-slate-100 px-6 py-20 dark:bg-slate-900">
       <div className="mx-auto max-w-4xl">
-        <h2 className="text-center text-3xl font-bold text-stone-900 dark:text-white">
+        <h2 className="text-center text-3xl font-bold text-slate-800 dark:text-slate-100">
           Connect with StillRio
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-center text-stone-600 dark:text-stone-400">
+        <p className="mx-auto mt-4 max-w-xl text-center text-slate-600 dark:text-slate-400">
           Follow along on YouTube, TikTok, and Instagram for adventures, content, and more.
         </p>
         <div className="mt-12 flex flex-wrap justify-center gap-8">
@@ -45,10 +45,10 @@ export default function SocialLinks() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-3 rounded-2xl bg-white p-8 shadow-lg transition hover:shadow-xl dark:bg-stone-800 dark:hover:bg-stone-700"
+              className="flex flex-col items-center gap-3 rounded-3xl bg-white/90 p-8 shadow-lg transition hover:bg-white hover:shadow-xl dark:bg-slate-800/90 dark:hover:bg-slate-700/90"
             >
-              <span className="text-stone-700 dark:text-stone-200">{link.icon}</span>
-              <span className="font-medium text-stone-900 dark:text-white">{link.name}</span>
+              <span className="text-slate-700 dark:text-slate-200">{link.icon}</span>
+              <span className="font-medium text-slate-800 dark:text-slate-100">{link.name}</span>
             </a>
           ))}
         </div>

@@ -1,23 +1,32 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-stone-900 via-stone-800 to-stone-900 px-6 py-24 text-center">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.03\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-60" />
+    <section className="relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden rounded-b-3xl bg-gradient-to-b from-slate-800 via-slate-700 to-slate-800 px-6 py-24 text-center dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05)_0%,transparent_50%)]" />
+      <Image
+        src="/logo.png"
+        alt="StillRio"
+        width={120}
+        height={120}
+        className="logo-outline-dark relative z-10 mb-6 bg-transparent object-contain mix-blend-multiply drop-shadow-[0_0_24px_rgba(255,255,255,0.4)] dark:mix-blend-normal"
+      />
       <h1 className="relative z-10 text-5xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl">
         StillRio
       </h1>
-      <p className="relative z-10 mt-6 max-w-2xl text-lg text-stone-300 sm:text-xl">
+      <p className="relative z-10 mt-6 max-w-2xl text-lg text-slate-200 sm:text-xl dark:text-slate-300">
         Creator • Explorer • Adventurer. Plan your next journey and discover what&apos;s out there.
       </p>
       <div className="relative z-10 mt-10 flex flex-wrap justify-center gap-4">
         <a
           href="#social"
-          className="rounded-full bg-white px-6 py-3 font-medium text-stone-900 transition hover:bg-stone-100"
+          className="rounded-full bg-white px-6 py-3 font-medium text-slate-800 transition hover:bg-slate-100"
         >
           Connect
         </a>
         <a
           href="#planner"
-          className="rounded-full border border-white/30 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+          className="rounded-full border border-white/40 px-6 py-3 font-medium text-white transition hover:bg-white/10"
         >
           Plan Adventure
         </a>

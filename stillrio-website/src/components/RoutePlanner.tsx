@@ -84,19 +84,19 @@ export default function RoutePlanner() {
   }
 
   return (
-    <section id="planner" className="bg-stone-100 px-6 py-20 dark:bg-stone-900">
+    <section id="planner" className="bg-slate-100 px-6 py-20 dark:bg-slate-900">
       <div className="mx-auto max-w-4xl">
-        <h2 className="text-center text-3xl font-bold text-stone-900 dark:text-white">
+        <h2 className="text-center text-3xl font-bold text-slate-800 dark:text-slate-100">
           Plan Your Adventure
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-center text-stone-600 dark:text-stone-400">
+        <p className="mx-auto mt-4 max-w-xl text-center text-slate-600 dark:text-slate-400">
           Enter a start and end point, pick how you want to travel, and get a real route with map,
           distance, and time.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-10 space-y-4">
           <div>
-            <label htmlFor="start" className="block text-sm font-medium text-stone-700 dark:text-stone-300">
+            <label htmlFor="start" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
               Start
             </label>
             <input
@@ -105,11 +105,11 @@ export default function RoutePlanner() {
               value={start}
               onChange={(e) => setStart(e.target.value)}
               placeholder="e.g. Central Park, NYC"
-              className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-4 py-2 dark:border-stone-600 dark:bg-stone-800 dark:text-white"
+              className="mt-1 w-full rounded-xl border border-slate-300/80 bg-white/95 px-4 py-2 dark:border-slate-600/80 dark:bg-slate-800/95 dark:text-white"
             />
           </div>
           <div>
-            <label htmlFor="end" className="block text-sm font-medium text-stone-700 dark:text-stone-300">
+            <label htmlFor="end" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
               End
             </label>
             <input
@@ -118,11 +118,11 @@ export default function RoutePlanner() {
               value={end}
               onChange={(e) => setEnd(e.target.value)}
               placeholder="e.g. Times Square, NYC"
-              className="mt-1 w-full rounded-lg border border-stone-300 bg-white px-4 py-2 dark:border-stone-600 dark:bg-stone-800 dark:text-white"
+              className="mt-1 w-full rounded-xl border border-slate-300/80 bg-white/95 px-4 py-2 dark:border-slate-600/80 dark:bg-slate-800/95 dark:text-white"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-stone-700 dark:text-stone-300">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
               Travel mode
             </label>
             <div className="mt-2 flex flex-wrap gap-3">
@@ -135,18 +135,18 @@ export default function RoutePlanner() {
                     onChange={() => setMode(m)}
                     className="rounded-full"
                   />
-                  <span className="capitalize text-stone-800 dark:text-stone-200">{m}</span>
+                  <span className="capitalize text-slate-800 dark:text-slate-200">{m}</span>
                 </label>
               ))}
             </div>
-            <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
               Transit not available via this API; use walk, bike, or drive.
             </p>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-full bg-stone-900 px-6 py-3 font-medium text-white transition hover:bg-stone-800 disabled:opacity-50 dark:bg-white dark:text-stone-900 dark:hover:bg-stone-200"
+            className="w-full rounded-2xl bg-slate-800 px-6 py-3 font-medium text-white transition hover:bg-slate-700 disabled:opacity-50 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
           >
             {loading ? "Finding route…" : "Get Route"}
           </button>
@@ -160,25 +160,25 @@ export default function RoutePlanner() {
 
         {result && (
           <div className="mt-8 space-y-4">
-            <div className="flex flex-wrap gap-6 rounded-xl bg-white p-6 shadow dark:bg-stone-800">
+            <div className="flex flex-wrap gap-6 rounded-3xl bg-white/90 p-6 shadow dark:bg-slate-800/90">
               <div>
-                <span className="text-sm text-stone-500 dark:text-stone-400">Distance</span>
-                <p className="text-xl font-semibold text-stone-900 dark:text-white">
+                <span className="text-sm text-slate-500 dark:text-slate-400">Distance</span>
+                <p className="text-xl font-semibold text-slate-800 dark:text-slate-100">
                   {result.distance}
                 </p>
               </div>
               <div>
-                <span className="text-sm text-stone-500 dark:text-stone-400">Duration</span>
-                <p className="text-xl font-semibold text-stone-900 dark:text-white">
+                <span className="text-sm text-slate-500 dark:text-slate-400">Duration</span>
+                <p className="text-xl font-semibold text-slate-800 dark:text-slate-100">
                   {result.duration}
                 </p>
               </div>
               <div>
-                <span className="text-sm text-stone-500 dark:text-stone-400">Summary</span>
-                <p className="font-medium text-stone-900 dark:text-white">{result.summary}</p>
+                <span className="text-sm text-slate-500 dark:text-slate-400">Summary</span>
+                <p className="font-medium text-slate-800 dark:text-slate-100">{result.summary}</p>
               </div>
             </div>
-            <div className="h-[400px] overflow-hidden rounded-xl border border-stone-200 dark:border-stone-700">
+            <div className="h-[400px] overflow-hidden rounded-3xl border border-slate-200/80 dark:border-slate-700/80">
               <MapWithRoute coordinates={result.coordinates} />
             </div>
           </div>
