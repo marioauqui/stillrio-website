@@ -1,3 +1,5 @@
+import ClawMarks from "./ClawMarks";
+
 const socialLinks = [
   {
     name: "YouTube",
@@ -30,12 +32,12 @@ const socialLinks = [
 
 export default function SocialLinks() {
   return (
-    <section id="social" className="bg-slate-100 px-6 py-20 dark:bg-slate-900">
+    <section id="social" className="bg-slate-100 px-6 py-20">
       <div className="mx-auto max-w-4xl">
-        <h2 className="text-center text-3xl font-bold text-slate-800 dark:text-slate-100">
+        <h2 className="text-center text-3xl font-bold text-slate-800">
           Connect with StillRio
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-center text-slate-600 dark:text-slate-400">
+        <p className="mx-auto mt-4 max-w-xl text-center text-slate-600">
           Follow along on YouTube, TikTok, and Instagram for adventures, content, and more.
         </p>
         <div className="mt-12 flex flex-wrap justify-center gap-8">
@@ -45,10 +47,13 @@ export default function SocialLinks() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-3 rounded-3xl bg-white/90 p-8 shadow-lg transition hover:bg-white hover:shadow-xl dark:bg-slate-800/90 dark:hover:bg-slate-700/90"
+              className="group relative flex flex-col items-center gap-3 rounded-2xl border border-slate-200/60 bg-white p-8 shadow-sm transition-all duration-200 hover:border-slate-300 hover:shadow-md active:scale-[0.99]"
             >
-              <span className="text-slate-700 dark:text-slate-200">{link.icon}</span>
-              <span className="font-medium text-slate-800 dark:text-slate-100">{link.name}</span>
+              <span className="absolute right-4 top-4 opacity-60">
+                <ClawMarks variant="dark" size={24} />
+              </span>
+              <span className="text-slate-600 transition-colors duration-200 group-hover:text-slate-900">{link.icon}</span>
+              <span className="font-medium text-slate-800">{link.name}</span>
             </a>
           ))}
         </div>

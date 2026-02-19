@@ -1,9 +1,6 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 
-/* Use class-based dark mode instead of system preference */
-@custom-variant dark (&:where(.dark, .dark *));
-
 :root {
   --background: #e8eef6;
   --foreground: #1e3a5f;
@@ -16,20 +13,42 @@
   --font-mono: var(--font-geist-mono);
 }
 
-.dark {
-  --background: #0c1929;
-  --foreground: #e2e8f0;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Soft outline for logo in dark mode – blends into navy */
-.dark .logo-outline-dark {
-  filter: drop-shadow(0 0 3px rgba(226, 232, 240, 0.5))
-    drop-shadow(0 0 8px rgba(226, 232, 240, 0.25))
-    drop-shadow(0 0 20px rgba(148, 163, 184, 0.2));
+/* Claw marks float animation */
+@keyframes claw-float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(2px, -2px);
+  }
+  50% {
+    transform: translate(-1px, 1px);
+  }
+  75% {
+    transform: translate(1px, 2px);
+  }
+}
+
+.animate-claw-float {
+  animation: claw-float 3s ease-in-out infinite;
+}
+
+/* Ticker / marquee banner */
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 30s linear infinite;
 }
