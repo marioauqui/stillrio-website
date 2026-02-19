@@ -30,8 +30,8 @@ export default function LogoCube() {
       <div
         className="relative"
         style={{
-          width: SIZE,
-          height: SIZE,
+          width: `${SIZE}px`,
+          height: `${SIZE}px`,
           perspective: "600px",
           transformStyle: "preserve-3d",
         }}
@@ -39,8 +39,8 @@ export default function LogoCube() {
         <div
           className="cube-inner absolute left-0 top-0"
           style={{
-            width: SIZE,
-            height: SIZE,
+            width: `${SIZE}px`,
+            height: `${SIZE}px`,
             transformStyle: "preserve-3d",
           }}
         >
@@ -48,8 +48,8 @@ export default function LogoCube() {
           <div
             className={faceBase}
             style={{
-              width: SIZE,
-              height: SIZE,
+              width: `${SIZE}px`,
+              height: `${SIZE}px`,
               transform: `translateZ(${HALF}px)`,
             }}
           >
@@ -65,8 +65,8 @@ export default function LogoCube() {
           <div
             className={faceBase}
             style={{
-              width: SIZE,
-              height: SIZE,
+              width: `${SIZE}px`,
+              height: `${SIZE}px`,
               transform: `rotateY(180deg) translateZ(${HALF}px)`,
             }}
           >
@@ -85,8 +85,8 @@ export default function LogoCube() {
           <div
             className={faceBase}
             style={{
-              width: SIZE,
-              height: SIZE,
+              width: `${SIZE}px`,
+              height: `${SIZE}px`,
               transform: `rotateY(90deg) translateZ(${HALF}px)`,
             }}
           >
@@ -103,8 +103,8 @@ export default function LogoCube() {
           <div
             className={faceBase}
             style={{
-              width: SIZE,
-              height: SIZE,
+              width: `${SIZE}px`,
+              height: `${SIZE}px`,
               transform: `rotateY(-90deg) translateZ(${HALF}px)`,
             }}
           >
@@ -121,8 +121,8 @@ export default function LogoCube() {
           <div
             className={`${solidFaceBase}`}
             style={{
-              width: SIZE,
-              height: SIZE,
+              width: `${SIZE}px`,
+              height: `${SIZE}px`,
               transform: `rotateX(90deg) translateZ(${HALF}px)`,
             }}
           />
@@ -130,8 +130,8 @@ export default function LogoCube() {
           <div
             className={`${solidFaceBase}`}
             style={{
-              width: SIZE,
-              height: SIZE,
+              width: `${SIZE}px`,
+              height: `${SIZE}px`,
               transform: `rotateX(-90deg) translateZ(${HALF}px)`,
             }}
           />

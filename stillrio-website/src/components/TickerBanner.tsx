@@ -1,5 +1,3 @@
-"use client";
-
 export default function TickerBanner({
   text = "Stay tuned — updates coming soon",
 }: {

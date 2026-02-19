@@ -31,7 +31,7 @@ export default function ClawMarks({
         height={size}
         aria-hidden
         className="block"
-        style={{ maxWidth: size, height: "auto", verticalAlign: "middle" }}
+        style={{ maxWidth: `${size}px`, height: "auto", verticalAlign: "middle" }}
       />
     </span>
   );
