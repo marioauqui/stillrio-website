@@ -1,6 +1,5 @@
 export default function VideoEmbed() {
-  // Replace with your actual YouTube video ID
-  const videoId = "dQw4w9WgXcQ"; // Placeholder - swap for your StillRio video
+  const videoId = "Hfm94aHAbYQ"; // Latest from StillRio
 
   return (
     <section className="bg-slate-50 px-6 py-20">

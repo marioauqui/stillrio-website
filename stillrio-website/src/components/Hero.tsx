@@ -13,7 +13,10 @@ export default function Hero() {
         StillRio
       </h1>
       <p className="relative z-10 mt-6 max-w-2xl text-lg text-slate-200 sm:text-xl">
-        Creator • Explorer • Adventurer. Plan your next journey and discover what&apos;s out there.
+        Creator • Explorer • Adventurer. Plan your next road trip adventure and discover what&apos;s out there.
+      </p>
+      <p className="relative z-10 mt-3 text-sm text-slate-300">
+        New: AI-powered road trip planner with suggested stops along your route.
       </p>
       <div className="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-6">
         <ClawMarks variant="light" size={32} className="hidden sm:block -scale-x-100" />
@@ -28,9 +31,18 @@ export default function Hero() {
             href="/adventure"
             className="rounded-xl border border-white/60 bg-white/5 px-6 py-3 font-semibold tracking-wide text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/15 hover:border-white/80 active:scale-[0.98]"
           >
-            Plan Adventure
+            Plan Road Trip
+          </Link>
+          <Link
+            href="/#top-tracks"
+            className="rounded-xl border border-white/60 bg-white/5 px-6 py-3 font-semibold tracking-wide text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/15 hover:border-white/80 active:scale-[0.98]"
+          >
+            Top Tracks
           </Link>
         </div>
+        <p className="relative z-10 w-full text-center text-sm text-slate-400">
+          Share your journey with <span className="font-medium text-slate-300">#stillrio</span> <span className="font-medium text-slate-300">#berio</span>
+        </p>
         <ClawMarks variant="light" size={32} className="hidden sm:block" />
       </div>
     </section>

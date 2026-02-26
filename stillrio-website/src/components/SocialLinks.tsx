@@ -38,7 +38,7 @@ export default function SocialLinks() {
           Connect with StillRio
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-center text-slate-600">
-          Follow along on YouTube, TikTok, and Instagram for adventures, content, and more.
+          Follow along on YouTube, TikTok, and Instagram for adventures, content, and more. Share your journey with <strong>#stillrio</strong> and <strong>#berio</strong>!
         </p>
         <div className="mt-12 flex flex-wrap justify-center gap-8">
           {socialLinks.map((link) => (
