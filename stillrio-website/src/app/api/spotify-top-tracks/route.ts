@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
       },
       body: new URLSearchParams({
         grant_type: "refresh_token",
-        refresh_token: refreshToken,
+        refresh_token: refreshToken as string,
       }),
       cache: "no-store",
     });
