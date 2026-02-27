@@ -425,7 +425,7 @@ export default function RoutePlanner() {
     try {
       const res = await fetchWithTimeout(`/api/geocode?q=${encodeURIComponent(address)}`);
       if (!res.ok) return null;
-      const data = await res.json();
+    const data = await res.json();
       return Array.isArray(data) && data.length === 2
         ? ([Number(data[0]), Number(data[1])] as [number, number])
         : null;
@@ -691,9 +691,9 @@ export default function RoutePlanner() {
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500">Your route</h3>
             <div className="space-y-4">
               <AddressAutocomplete
-                id="start"
+              id="start"
                 label="Start"
-                value={start}
+              value={start}
                 onChange={setStart}
                 placeholder="e.g. 350 5th Ave, NYC or a city name"
               />
@@ -709,23 +709,23 @@ export default function RoutePlanner() {
           <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500">Departure</h3>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div>
+          <div>
                 <label htmlFor="departure-date" className="block text-sm font-medium text-slate-700">
                 Departure date
-              </label>
-              <input
+            </label>
+            <input
                 id="departure-date"
                 type="date"
                 value={departureDate}
                 onChange={(e) => setDepartureDate(e.target.value)}
                 className="mt-1 w-full rounded-xl border border-slate-300/80 bg-white/95 px-4 py-2 text-slate-900 transition-all duration-200 focus:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:ring-offset-1"
-              />
-              </div>
-              <div>
+            />
+          </div>
+          <div>
                 <label htmlFor="departure-time" className="block text-sm font-medium text-slate-700">
                 Departure time
-              </label>
-              <input
+            </label>
+                  <input
                 id="departure-time"
                 type="time"
                 value={departureTime}
@@ -739,13 +739,13 @@ export default function RoutePlanner() {
             <span className="absolute -left-2 top-1/2 -translate-y-1/2 lg:-left-4">
               <ClawMarks variant="dark" size={28} />
             </span>
-            <button
-              type="submit"
-              disabled={loading}
+          <button
+            type="submit"
+            disabled={loading}
               className="w-full rounded-xl bg-slate-800 px-6 py-3 font-semibold tracking-wide text-white transition-all duration-200 hover:bg-slate-700 disabled:opacity-50 active:scale-[0.99]"
-            >
-              {loading ? "Finding route…" : "Get Route"}
-            </button>
+          >
+            {loading ? "Finding route…" : "Get Route"}
+          </button>
             <span className="absolute -right-2 top-1/2 -translate-y-1/2 lg:-right-4 -scale-x-100">
               <ClawMarks variant="dark" size={28} />
             </span>
