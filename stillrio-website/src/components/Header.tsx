@@ -22,7 +22,7 @@ export default function Header() {
             href="/#social"
             className="text-sm font-medium text-slate-600 transition hover:text-slate-800"
           >
-            Connect
+            Find My Content
           </Link>
           <Link
             href="/adventure"

@@ -10,7 +10,7 @@ export default function Home() {
     <div className="min-h-screen">
       <Header />
       <Hero />
-      <section className="border-b border-slate-200/80 bg-gradient-to-r from-slate-50 to-white px-6 py-12">
+      <section className="border-b border-slate-200/80 bg-white px-6 py-12">
         <div className="mx-auto max-w-4xl text-center">
           <span className="rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
             New

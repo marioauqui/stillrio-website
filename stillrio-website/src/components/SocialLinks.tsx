@@ -32,28 +32,28 @@ const socialLinks = [
 
 export default function SocialLinks() {
   return (
-    <section id="social" className="bg-slate-100 px-6 py-20">
+    <section id="social" className="bg-slate-800 px-6 pt-16 pb-8">
       <div className="mx-auto max-w-4xl">
-        <h2 className="text-center text-3xl font-bold text-slate-800">
+        <h2 className="text-center text-3xl font-bold text-white">
           Connect with StillRio
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-center text-slate-600">
-          Follow along on YouTube, TikTok, and Instagram for adventures, content, and more. Share your journey with <strong>#stillrio</strong> and <strong>#berio</strong>!
+        <p className="mx-auto mt-4 max-w-xl text-center text-slate-300">
+          Follow along on YouTube, TikTok, and Instagram for adventures, content, and more. Share your journey with <strong className="text-white">#stillrio</strong> and <strong className="text-white">#berio</strong>!
         </p>
-        <div className="mt-12 flex flex-wrap justify-center gap-8">
+        <div className="mt-10 flex flex-wrap justify-center gap-8">
           {socialLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex flex-col items-center gap-3 rounded-2xl border border-slate-200/60 bg-white p-8 shadow-sm transition-all duration-200 hover:border-slate-300 hover:shadow-md active:scale-[0.99]"
+              className="group relative flex flex-col items-center gap-3 rounded-2xl border border-white/20 bg-white/5 p-8 shadow-sm transition-all duration-200 hover:border-white/40 hover:bg-white/10 active:scale-[0.99]"
             >
               <span className="absolute right-4 top-4 opacity-60">
-                <ClawMarks variant="dark" size={24} />
+                <ClawMarks variant="light" size={24} />
               </span>
-              <span className="text-slate-600 transition-colors duration-200 group-hover:text-slate-900">{link.icon}</span>
-              <span className="font-medium text-slate-800">{link.name}</span>
+              <span className="text-slate-300 transition-colors duration-200 group-hover:text-white">{link.icon}</span>
+              <span className="font-medium text-white">{link.name}</span>
             </a>
           ))}
         </div>

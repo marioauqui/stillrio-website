@@ -12,8 +12,11 @@ export default function Hero() {
       <h1 className="relative z-10 text-5xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl">
         StillRio
       </h1>
-      <p className="relative z-10 mt-6 max-w-2xl text-lg text-slate-200 sm:text-xl">
-        Creator • Explorer • Adventurer. Plan your next road trip adventure and discover what&apos;s out there.
+      <p className="relative z-10 mt-6 text-sm font-medium uppercase tracking-widest text-slate-400">
+        Creator • Explorer • Adventurer
+      </p>
+      <p className="relative z-10 mt-4 max-w-2xl text-xl text-slate-200 sm:text-2xl">
+        Plan your next road trip adventure and discover what&apos;s out there.
       </p>
       <p className="relative z-10 mt-3 text-sm text-slate-300">
         New: AI-powered road trip planner with suggested stops along your route.
@@ -25,7 +28,7 @@ export default function Hero() {
             href="/#social"
             className="rounded-xl bg-white px-6 py-3 font-semibold tracking-wide text-slate-800 transition-all duration-200 hover:bg-slate-50 hover:shadow-md active:scale-[0.98]"
           >
-            Connect
+            Find My Content
           </Link>
           <Link
             href="/adventure"

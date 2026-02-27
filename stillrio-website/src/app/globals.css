@@ -2,8 +2,8 @@
 @import "leaflet/dist/leaflet.css";
 
 :root {
-  --background: #e8eef6;
-  --foreground: #1e3a5f;
+  --background: #ffffff;
+  --foreground: #0f172a;
 }
 
 @theme inline {

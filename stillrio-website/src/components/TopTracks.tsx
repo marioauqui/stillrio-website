@@ -75,7 +75,7 @@ export default function TopTracks() {
 
   if (loading && tracks.length === 0) {
     return (
-      <section id="top-tracks" className="border-t border-slate-200/80 bg-slate-50 px-6 py-12">
+      <section id="top-tracks" className="border-t border-slate-200/80 bg-white px-6 py-12">
         <div className="mx-auto max-w-3xl">
           <h2 className="text-2xl font-bold text-slate-800">
             Top Tracks / Things to listen when Adventuring
@@ -106,7 +106,7 @@ export default function TopTracks() {
 
   if (error) {
     return (
-      <section id="top-tracks" className="border-t border-slate-200/80 bg-slate-50 px-6 py-12">
+      <section id="top-tracks" className="border-t border-slate-200/80 bg-white px-6 py-12">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-bold text-slate-800">Top Tracks / Things to listen when Adventuring</h2>
           <p className="mt-4 text-sm text-slate-500">{error}</p>
@@ -123,7 +123,7 @@ export default function TopTracks() {
   }
 
   return (
-    <section id="top-tracks" className="border-t border-slate-200/80 bg-slate-50 px-6 py-12">
+    <section id="top-tracks" className="border-t border-slate-200/80 bg-white px-6 py-12">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-slate-800">
           Top Tracks / Things to listen when Adventuring
