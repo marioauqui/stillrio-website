@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "kill -9 $(lsof -ti:3000) 2>/dev/null; rm -f .next/dev/lock; next dev -p 3000",
+    "dev": "kill -9 $(lsof -ti:3000) 2>/dev/null; rm -f .next/dev/lock; next dev -p 3000 -H 127.0.0.1",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
