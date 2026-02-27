@@ -48,6 +48,8 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  const token = refreshToken as string;
+
   try {
     const tokenRes = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
@@ -57,7 +59,7 @@ export async function GET(request: NextRequest) {
       },
       body: new URLSearchParams({
         grant_type: "refresh_token",
-        refresh_token: refreshToken as string,
+        refresh_token: token,
       }),
       cache: "no-store",
     });
