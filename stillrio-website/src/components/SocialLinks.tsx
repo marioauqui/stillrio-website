@@ -1,5 +1,3 @@
-import ClawMarks from "./ClawMarks";
-
 const socialLinks = [
   {
     name: "YouTube",
@@ -32,28 +30,33 @@ const socialLinks = [
 
 export default function SocialLinks() {
   return (
-    <section id="social" className="bg-slate-800 px-6 pt-16 pb-8">
-      <div className="mx-auto max-w-4xl">
+    <section id="social" className="px-6 py-16" style={{ background: "#0f172a" }}>
+      <div className="mx-auto max-w-[1040px]">
         <h2 className="text-center text-3xl font-bold text-white">
-          Connect with StillRio
+          Where It Lives
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-center text-slate-300">
-          Follow along on YouTube, TikTok, and Instagram for adventures, content, and more. Share your journey with <strong className="text-white">#stillrio</strong> and <strong className="text-white">#berio</strong>!
+        <p className="mx-auto mt-3 max-w-xl text-center text-slate-400">
+          I post the journey on YouTube, TikTok, and Instagram.
+          <br />
+          If you&apos;re out moving too, use{" "}
+          <strong className="font-medium text-slate-300">#stillrio</strong> or{" "}
+          <strong className="font-medium text-slate-300">#berio</strong>.
         </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-8">
+        <div className="mt-10 flex flex-wrap justify-center gap-5">
           {socialLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex flex-col items-center gap-3 rounded-2xl border border-white/20 bg-white/5 p-8 shadow-sm transition-all duration-200 hover:border-white/40 hover:bg-white/10 active:scale-[0.99]"
+              className="group flex w-36 flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-7 shadow-elev-1 transition-premium hover:-translate-y-1 hover:border-white/25 hover:bg-white/10 active:translate-y-0"
             >
-              <span className="absolute right-4 top-4 opacity-60">
-                <ClawMarks variant="light" size={24} />
+              <span className="text-slate-400 transition-colors duration-150 group-hover:text-white">
+                {link.icon}
               </span>
-              <span className="text-slate-300 transition-colors duration-200 group-hover:text-white">{link.icon}</span>
-              <span className="font-medium text-white">{link.name}</span>
+              <span className="text-sm font-medium text-slate-300 transition-colors duration-150 group-hover:text-white">
+                {link.name}
+              </span>
             </a>
           ))}
         </div>

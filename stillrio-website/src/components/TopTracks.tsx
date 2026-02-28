@@ -73,28 +73,50 @@ export default function TopTracks() {
     };
   }, [range]);
 
+  const sectionClass = "px-6 py-14";
+  const sectionStyle = { background: "var(--color-bg)" };
+  const innerClass = "mx-auto max-w-[1040px]";
+
+  const header = (
+    <>
+      <h2 className="text-2xl font-bold text-slate-900">Top Tracks for the Journey</h2>
+      <p className="mt-1.5 text-sm text-slate-500">Just what&apos;s been playing.</p>
+    </>
+  );
+
+  const rangeTabs = (disabled = false) => (
+    <div className="mt-5 flex gap-5 border-b border-slate-200">
+      {RANGES.map((r) => (
+        <button
+          key={r.value}
+          disabled={disabled}
+          onClick={() => !disabled && setRange(r.value)}
+          className={`border-b-2 pb-3 text-sm capitalize transition-colors duration-150 ${
+            !disabled && range === r.value
+              ? "border-slate-900 font-medium text-slate-900"
+              : "border-transparent text-slate-400 hover:text-slate-600"
+          }`}
+        >
+          {r.label}
+        </button>
+      ))}
+    </div>
+  );
+
   if (loading && tracks.length === 0) {
     return (
-      <section id="top-tracks" className="border-t border-slate-200/80 bg-white px-6 py-12">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="text-2xl font-bold text-slate-800">
-            Top Tracks / Things to listen when Adventuring
-          </h2>
-          <div className="mt-4 flex gap-6 border-b border-slate-200">
-            {RANGES.map((r) => (
-              <button key={r.value} disabled className="border-b-2 border-transparent pb-3 text-sm capitalize text-slate-400">
-                {r.label}
-              </button>
-            ))}
-          </div>
-          <div className="mt-4 space-y-2">
+      <section id="top-tracks" className={sectionClass} style={sectionStyle}>
+        <div className={innerClass}>
+          {header}
+          {rangeTabs(true)}
+          <div className="mt-5 space-y-2">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="flex items-center gap-3 py-2">
-                <span className="w-8 text-slate-400">• {i + 1}</span>
-                <div className="h-10 w-10 flex-shrink-0 animate-pulse rounded bg-slate-200" />
+                <span className="w-7 text-xs text-slate-300">• {i + 1}</span>
+                <div className="h-10 w-10 flex-shrink-0 animate-pulse rounded-lg bg-slate-200" />
                 <div className="min-w-0 flex-1">
-                  <div className="h-4 w-32 animate-pulse rounded bg-slate-200" />
-                  <div className="mt-1 h-3 w-20 animate-pulse rounded bg-slate-200" />
+                  <div className="h-3.5 w-36 animate-pulse rounded bg-slate-200" />
+                  <div className="mt-1.5 h-3 w-24 animate-pulse rounded bg-slate-200" />
                 </div>
               </div>
             ))}
@@ -106,10 +128,10 @@ export default function TopTracks() {
 
   if (error) {
     return (
-      <section id="top-tracks" className="border-t border-slate-200/80 bg-white px-6 py-12">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-bold text-slate-800">Top Tracks / Things to listen when Adventuring</h2>
-          <p className="mt-4 text-sm text-slate-500">{error}</p>
+      <section id="top-tracks" className={sectionClass} style={sectionStyle}>
+        <div className={`${innerClass} text-center`}>
+          {header}
+          <p className="mt-5 text-sm text-slate-500">{error}</p>
           <p className="mt-2 text-xs text-slate-400">
             If you see &quot;Need user-top-read scope&quot;, visit{" "}
             <a href="/api/spotify-auth" className="text-slate-600 underline hover:text-slate-800">
@@ -123,57 +145,41 @@ export default function TopTracks() {
   }
 
   return (
-    <section id="top-tracks" className="border-t border-slate-200/80 bg-white px-6 py-12">
-      <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold text-slate-800">
-          Top Tracks / Things to listen when Adventuring
-        </h2>
-        <div className="mt-4 flex gap-6 border-b border-slate-200">
-          {RANGES.map((r) => (
-            <button
-              key={r.value}
-              onClick={() => setRange(r.value)}
-              className={`border-b-2 pb-3 text-sm capitalize transition-colors ${
-                range === r.value
-                  ? "border-slate-800 font-medium text-slate-800"
-                  : "border-transparent text-slate-500 hover:text-slate-700"
-              }`}
-            >
-              {r.label}
-            </button>
-          ))}
-        </div>
+    <section id="top-tracks" className={sectionClass} style={sectionStyle}>
+      <div className={innerClass}>
+        {header}
+        {rangeTabs()}
         {tracks.length === 0 ? (
-          <p className="mt-8 text-slate-500">No listening data for this period yet.</p>
+          <p className="mt-8 text-sm text-slate-500">No listening data for this period yet.</p>
         ) : (
-          <ul className="mt-2 divide-y divide-slate-200/80">
+          <ul className="mt-2 divide-y divide-slate-100">
             {tracks.map((t, i) => (
               <li key={t.id}>
                 <a
                   href={t.url ?? "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center gap-3 py-3 transition-colors hover:bg-slate-100/50 ${
-                    !t.url ? "pointer-events-none cursor-default opacity-60" : ""
+                  className={`flex items-center gap-3 rounded-xl px-2 py-3 transition-all duration-150 hover:bg-slate-100/70 ${
+                    !t.url ? "pointer-events-none cursor-default opacity-50" : ""
                   }`}
                 >
-                  <span className="w-8 flex-shrink-0 text-sm text-slate-500">• {i + 1}</span>
+                  <span className="w-7 flex-shrink-0 text-xs text-slate-400">{i + 1}</span>
                   {t.imageUrl ? (
                     <img
                       src={t.imageUrl}
                       alt={t.album ?? t.name}
-                      className="h-10 w-10 flex-shrink-0 rounded object-cover"
+                      className="h-10 w-10 flex-shrink-0 rounded-lg object-cover shadow-elev-1"
                     />
                   ) : (
-                    <div className="h-10 w-10 flex-shrink-0 rounded bg-slate-200" />
+                    <div className="h-10 w-10 flex-shrink-0 rounded-lg bg-slate-200" />
                   )}
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-medium text-slate-800">{t.name}</p>
-                    <p className="truncate text-sm text-slate-600">{t.artist}</p>
+                    <p className="truncate text-sm font-medium text-slate-900">{t.name}</p>
+                    <p className="truncate text-sm text-slate-500">{t.artist}</p>
                   </div>
                   {t.url && (
                     <svg
-                      className="h-5 w-5 flex-shrink-0 text-[#1DB954]"
+                      className="h-4 w-4 flex-shrink-0 text-slate-900"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden

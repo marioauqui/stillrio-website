@@ -108,7 +108,7 @@ export default function AddressAutocomplete({
 
   return (
     <div ref={wrapperRef} className="relative">
-      <label htmlFor={id} className="block text-sm font-medium text-slate-700">
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-slate-700">
         {label}
       </label>
       <div className="relative">
@@ -121,7 +121,7 @@ export default function AddressAutocomplete({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           autoComplete="off"
-          className="mt-1 w-full rounded-xl border border-slate-300/80 bg-white/95 px-4 py-2 pr-10 text-slate-900 transition-all duration-200 focus:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:ring-offset-1"
+          className="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 pr-10 text-sm text-slate-900 placeholder:text-slate-400 transition-all duration-150 hover:border-slate-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
         />
         {isLoading && (
           <span
@@ -137,7 +137,7 @@ export default function AddressAutocomplete({
       </div>
       {isOpen && suggestions.length > 0 && (
         <ul
-          className="absolute left-0 right-0 z-[100] mt-1 max-h-36 overflow-auto rounded-xl border border-slate-200 bg-white py-1 shadow-xl"
+          className="absolute left-0 right-0 z-[100] mt-1 max-h-36 overflow-auto rounded-xl border border-slate-200 bg-white py-1 shadow-lg"
           role="listbox"
         >
           {suggestions.map((s, i) => (
@@ -145,7 +145,7 @@ export default function AddressAutocomplete({
               key={`${s.lat}-${s.lon}-${i}`}
               role="option"
               aria-selected={i === highlightIndex}
-              className={`cursor-pointer px-4 py-2 text-sm text-slate-800 hover:bg-slate-100 ${i === highlightIndex ? "bg-slate-100" : ""}`}
+              className={`cursor-pointer px-4 py-2.5 text-sm text-slate-700 transition-colors hover:bg-slate-50 ${i === highlightIndex ? "bg-slate-50" : ""}`}
               onMouseEnter={() => setHighlightIndex(i)}
               onClick={() => handleSelect(s)}
             >

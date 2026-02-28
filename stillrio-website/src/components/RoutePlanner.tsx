@@ -654,505 +654,503 @@ export default function RoutePlanner() {
   }
 
   return (
-    <section id="planner" className="bg-gradient-to-b from-slate-50 to-slate-100 px-6 py-16">
-      <div className="mx-auto max-w-4xl">
-        <h2 className="text-center text-3xl font-bold tracking-tight text-slate-800">
-          Plan Your Road Trip
-        </h2>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-slate-600">
-          Enter your start and destination, set your departure time, and get a driving route with live weather and suggested stops along the way.
-        </p>
+    <section id="planner" className="min-h-screen px-4 py-12 sm:px-6 sm:py-16" style={{ background: "var(--color-bg)" }}>
+      <div className="mx-auto max-w-[1040px]">
 
-        {/* Step-by-step instructions */}
-        <div className="mt-8 rounded-2xl border border-slate-200/80 bg-white/95 p-6 shadow-sm">
-          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500">How it works</h3>
-          <ol className="space-y-3 text-sm text-slate-700">
-            <li className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-800 text-xs font-bold text-white">1</span>
-              <span><strong>Enter locations</strong> — Type your starting point (e.g. NYC) and destination (e.g. Austin, TX). Address autocomplete helps you pick the right place.</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-800 text-xs font-bold text-white">2</span>
-              <span><strong>Set departure</strong> — Choose when you plan to leave. We use this to show live weather at your start and destination.</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-800 text-xs font-bold text-white">3</span>
-              <span><strong>Get your route</strong> — Click &quot;Get Route&quot; to see distance, driving time, and a map with your path.</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-800 text-xs font-bold text-white">4</span>
-              <span><strong>Find stops</strong> — After your route loads, check categories (Food, Sights, etc.), pick subcategories if you want (e.g. Italian, BBQ), then click &quot;Get suggestions&quot; for AI-powered places along your route. Each suggestion shows how much time it adds (+X min detour).</span>
-            </li>
-          </ol>
+        {/* ── Hero ── */}
+        <div className="mb-12 text-center animate-fade-in-up">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl" style={{ lineHeight: 1.1 }}>
+            Plan Your Road Trip
+          </h1>
+          <p className="mx-auto mt-4 text-base text-slate-500 sm:text-lg" style={{ maxWidth: "60ch" }}>
+            Enter your start and destination, choose when you&apos;re leaving, and get your route with live weather and smart stops along the way.
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-          <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500">Your route</h3>
-            <div className="space-y-4">
-              <AddressAutocomplete
-              id="start"
-                label="Start"
-              value={start}
-                onChange={setStart}
-                placeholder="e.g. 350 5th Ave, NYC or a city name"
-              />
-              <AddressAutocomplete
-                id="end"
-                label="End"
-                value={end}
-                onChange={setEnd}
-                placeholder="e.g. 123 Main St, Austin TX or a city name"
-              />
+        {/* ── Two-column: How It Works + Form ── */}
+        <div className="grid grid-cols-1 items-start gap-6 animate-fade-in-up-delayed lg:grid-cols-[320px_1fr]">
+
+          {/* Left: How It Works */}
+          <aside className="rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm lg:sticky lg:top-24">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">How It Works</p>
+            <ol className="space-y-0">
+              {[
+                { n: "1", title: "Enter locations", desc: "Add your start and destination. Autocomplete helps you find the right spot." },
+                { n: "2", title: "Set departure", desc: "Pick when you\u2019re leaving. We\u2019ll show weather for your start and destination." },
+                { n: "3", title: "Get your route", desc: "See distance, drive time, and your path on the map." },
+                { n: "4", title: "Find stops", desc: "Browse food, sights, or nature along your route. Each stop shows how much time it adds." },
+              ].map((step, i) => (
+                <li key={step.n} className={`flex gap-3 py-4 ${i > 0 ? "border-t border-slate-100" : ""}`}>
+                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-900 text-[10px] font-bold leading-none text-white">
+                    {step.n}
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-800">{step.title}</p>
+                    <p className="mt-0.5 text-sm leading-relaxed text-slate-500">{step.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </aside>
+
+          {/* Right: Form Card */}
+          <div className="overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm">
+            <div className="border-b border-slate-100 px-6 py-5">
+              <h2 className="text-base font-semibold text-slate-900">Your Route</h2>
+              <p className="mt-0.5 text-sm text-slate-500">Enter start and destination to begin.</p>
             </div>
-          </div>
-          <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-500">Departure</h3>
-            <div className="grid gap-4 sm:grid-cols-2">
-          <div>
-                <label htmlFor="departure-date" className="block text-sm font-medium text-slate-700">
-                Departure date
-            </label>
-            <input
-                id="departure-date"
-                type="date"
-                value={departureDate}
-                onChange={(e) => setDepartureDate(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-300/80 bg-white/95 px-4 py-2 text-slate-900 transition-all duration-200 focus:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:ring-offset-1"
-            />
-          </div>
-          <div>
-                <label htmlFor="departure-time" className="block text-sm font-medium text-slate-700">
-                Departure time
-            </label>
-                  <input
-                id="departure-time"
-                type="time"
-                value={departureTime}
-                onChange={(e) => setDepartureTime(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-slate-300/80 bg-white/95 px-4 py-2 text-slate-900 transition-all duration-200 focus:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:ring-offset-1"
-              />
+            <form onSubmit={handleSubmit} className="space-y-5 p-6">
+
+              {/* Locations */}
+              <div className="space-y-3">
+                <AddressAutocomplete
+                  id="start"
+                  label="Start"
+                  value={start}
+                  onChange={setStart}
+                  placeholder="e.g. 350 5th Ave, NYC or a city name"
+                />
+                <AddressAutocomplete
+                  id="end"
+                  label="End"
+                  value={end}
+                  onChange={setEnd}
+                  placeholder="e.g. 123 Main St, Austin TX or a city name"
+                />
               </div>
-            </div>
-          </div>
-          <div className="relative">
-            <span className="absolute -left-2 top-1/2 -translate-y-1/2 lg:-left-4">
-              <ClawMarks variant="dark" size={28} />
-            </span>
-          <button
-            type="submit"
-            disabled={loading}
-              className="w-full rounded-xl bg-slate-800 px-6 py-3 font-semibold tracking-wide text-white transition-all duration-200 hover:bg-slate-700 disabled:opacity-50 active:scale-[0.99]"
-          >
-            {loading ? "Finding route…" : "Get Route"}
-          </button>
-            <span className="absolute -right-2 top-1/2 -translate-y-1/2 lg:-right-4 -scale-x-100">
-              <ClawMarks variant="dark" size={28} />
-            </span>
-          </div>
-        </form>
 
-        {error && (
-          <p className="mt-4 rounded-lg bg-red-100 p-4 text-red-700">
-            {error}
-          </p>
-        )}
+              {/* Departure */}
+              <div className="border-t border-slate-100 pt-5">
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">Departure</p>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="departure-date" className="mb-1.5 block text-sm font-medium text-slate-700">Date</label>
+                    <input
+                      id="departure-date"
+                      type="date"
+                      value={departureDate}
+                      onChange={(e) => setDepartureDate(e.target.value)}
+                      className="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-900 transition-all duration-150 hover:border-slate-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="departure-time" className="mb-1.5 block text-sm font-medium text-slate-700">Time</label>
+                    <input
+                      id="departure-time"
+                      type="time"
+                      value={departureTime}
+                      onChange={(e) => setDepartureTime(e.target.value)}
+                      className="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-900 transition-all duration-150 hover:border-slate-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    />
+                  </div>
+                </div>
+              </div>
 
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex h-12 w-full items-center justify-center rounded-[14px] bg-slate-900 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:-translate-y-px hover:shadow-md active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    </svg>
+                    Finding route…
+                  </span>
+                ) : "Get Route"}
+              </button>
+
+              {error && (
+                <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                  {error}
+                </div>
+              )}
+            </form>
+          </div>
+        </div>
+
+        {/* ── Results ── */}
         {result && result.routes.length > 0 && (() => {
           const currentRoute = result.routes[selectedRouteIndex] ?? result.routes[0];
           if (!currentRoute) return null;
           const baseMin = result.routes[0]?.durationMin ?? 0;
           return (
-          <div className="mt-8 space-y-6">
-            {result.routes.length > 1 && (
-              <div className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
-                <span className="mb-3 block text-xs font-medium uppercase tracking-wider text-slate-500">Choose a route</span>
-                <p className="mb-3 text-sm text-slate-600">Alternative paths in case one has traffic or delays.</p>
-                <div className="flex flex-wrap gap-2">
-                  {result.routes.map((r, i) => {
-                    const extraMin = i === 0 ? 0 : r.durationMin - baseMin;
-                    return (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => setSelectedRouteIndex(i)}
-                        className={`rounded-xl px-4 py-2.5 text-sm font-medium transition-colors ${
-                          selectedRouteIndex === i
-                            ? "bg-slate-800 text-white"
-                            : "border border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
-                        }`}
+            <div className="mt-6 space-y-4 animate-fade-in-up">
+
+              {/* Route selector */}
+              {result.routes.length > 1 && (
+                <div className="rounded-2xl border border-slate-200/70 bg-white p-5 shadow-sm">
+                  <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">Choose a route</span>
+                  <p className="mb-3 text-sm text-slate-500">Alternative paths in case one has traffic or delays.</p>
+                  <div className="flex flex-wrap gap-2">
+                    {result.routes.map((r, i) => {
+                      const extraMin = i === 0 ? 0 : r.durationMin - baseMin;
+                      return (
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={() => setSelectedRouteIndex(i)}
+                          className={`rounded-xl px-4 py-2 text-sm font-medium transition-all duration-150 ${
+                            selectedRouteIndex === i
+                              ? "bg-slate-900 text-white shadow-sm"
+                              : "border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50"
+                          }`}
+                        >
+                          Route {i + 1}{i === 0 ? " (fastest)" : ` (+${extraMin} min)`}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Stats */}
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                {[
+                  { label: "Distance", value: currentRoute.distance },
+                  { label: "Duration", value: currentRoute.duration, title: "Range accounts for typical traffic variance" },
+                  { label: "Leaving", value: result.departureDisplay },
+                  { label: "Summary", value: `${currentRoute.distance}, ~${currentRoute.duration} by ${mode}` },
+                ].map(({ label, value, title }) => (
+                  <div key={label} className="rounded-2xl border border-slate-200/70 bg-white p-4 shadow-sm">
+                    <p className="mb-1 text-xs text-slate-500">{label}</p>
+                    <p className="text-sm font-semibold leading-snug text-slate-900" title={title}>{value}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Weather */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                {[
+                  { label: "Weather at start (A)", weather: result.weatherA },
+                  { label: "Weather at destination (B)", weather: result.weatherB },
+                ].map(({ label, weather }) => (
+                  <div key={label} className="rounded-2xl border border-slate-200/70 bg-white p-5 shadow-sm">
+                    <p className="mb-2 text-xs font-medium text-slate-500">{label}</p>
+                    {weather ? (
+                      <div>
+                        <p className="text-lg font-semibold text-slate-900">{weather.temp}°F · {weather.description}</p>
+                        <p className="mt-1 text-sm text-slate-500">
+                          Wind {weather.windSpeed} mph{weather.precipitation > 0 && ` · ${weather.precipitation.toFixed(2)} in precip`}
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-slate-400">Weather unavailable</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Map */}
+              <div className="overflow-hidden rounded-2xl border border-slate-200/70 shadow-sm">
+                <p className="border-b border-slate-100 bg-slate-50 px-4 py-2 text-xs text-slate-500">Map — Use +/- to zoom. Suggested places appear as numbered markers.</p>
+                <div className="h-[400px]">
+                  <MapWithRoute
+                    coordinates={currentRoute.coordinates}
+                    places={suggestions
+                      .filter((s): s is Suggestion & { lat: number; lon: number } => s.lat != null && s.lon != null)
+                      .map((s, i) => ({ name: s.name, lat: s.lat!, lon: s.lon!, category: s.category, number: i + 1 }))}
+                  />
+                </div>
+              </div>
+
+              {/* Suggestions panel */}
+              <div className="rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm">
+                <h3 className="text-base font-semibold text-slate-900">Suggest places along the way</h3>
+                <p className="mt-1.5 text-sm text-slate-500">
+                  Choose categories (Food, Sights, etc.)—places matching <strong className="font-medium text-slate-700">any</strong> selected category will appear. Optionally narrow with subcategories (e.g. Italian, Museums), pick how far off-route you&apos;re willing to go, then click &quot;Get suggestions&quot; for AI-powered stops. Each place shows estimated detour time.
+                </p>
+
+                <div className="mt-5 space-y-5">
+                  <div className="flex flex-wrap gap-4">
+                    <div>
+                      <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">How far off route?</label>
+                      <select
+                        value={maxDeviationMinutes}
+                        onChange={(e) => setMaxDeviationMinutes(Number(e.target.value))}
+                        className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 transition-all duration-150 hover:border-slate-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                       >
-                        Route {i + 1}
-                        {i === 0 ? " (fastest)" : ` (+${extraMin} min)`}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-            <div className="flex flex-wrap gap-6 rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
-              <div>
-                <span className="text-sm text-slate-500">Distance</span>
-                <p className="text-xl font-semibold text-slate-800">
-                  {currentRoute.distance}
-                </p>
-              </div>
-              <div>
-                <span className="text-sm text-slate-500">Duration</span>
-                <p className="text-xl font-semibold text-slate-800" title="Range accounts for typical traffic variance">
-                  {currentRoute.duration}
-                </p>
-              </div>
-              <div>
-                <span className="text-sm text-slate-500">Leaving</span>
-                <p className="font-medium text-slate-800">{result.departureDisplay}</p>
-              </div>
-              <div>
-                <span className="text-sm text-slate-500">Summary</span>
-                <p className="font-medium text-slate-800">
-                  {currentRoute.distance}, ~{currentRoute.duration} by {mode}
-                </p>
-              </div>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-slate-200/80 bg-white/80 p-5 shadow-sm">
-                <span className="text-sm font-medium text-slate-500">Weather at start (A)</span>
-                {result.weatherA ? (
-                  <div className="mt-2 space-y-1">
-                    <p className="text-lg font-semibold text-slate-800">
-                      {result.weatherA.temp}°F · {result.weatherA.description}
-                    </p>
-                    <p className="text-sm text-slate-600">
-                      Wind {result.weatherA.windSpeed} mph
-                      {result.weatherA.precipitation > 0 && ` · ${result.weatherA.precipitation.toFixed(2)} in precip`}
-                    </p>
+                        <option value={15}>15 min</option>
+                        <option value={30}>30 min</option>
+                        <option value={45}>45 min</option>
+                        <option value={60}>1 hour</option>
+                        <option value={90}>1.5 hours</option>
+                        <option value={120}>2 hours</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">How many?</label>
+                      <select
+                        value={numPlaces}
+                        onChange={(e) => setNumPlaces(Number(e.target.value))}
+                        className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 transition-all duration-150 hover:border-slate-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                      >
+                        {[3, 5, 7, 10].map((n) => (
+                          <option key={n} value={n}>{n} places</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-                ) : (
-                  <p className="mt-2 text-sm text-slate-500">Weather unavailable</p>
-                )}
-              </div>
-              <div className="rounded-2xl border border-slate-200/80 bg-white/80 p-5 shadow-sm">
-                <span className="text-sm font-medium text-slate-500">Weather at destination (B)</span>
-                {result.weatherB ? (
-                  <div className="mt-2 space-y-1">
-                    <p className="text-lg font-semibold text-slate-800">
-                      {result.weatherB.temp}°F · {result.weatherB.description}
-                    </p>
-                    <p className="text-sm text-slate-600">
-                      Wind {result.weatherB.windSpeed} mph
-                      {result.weatherB.precipitation > 0 && ` · ${result.weatherB.precipitation.toFixed(2)} in precip`}
-                    </p>
-                  </div>
-                ) : (
-                  <p className="mt-2 text-sm text-slate-500">Weather unavailable</p>
-                )}
-              </div>
-            </div>
-            <div className="overflow-hidden rounded-2xl border border-slate-200/80 shadow-sm">
-              <p className="bg-slate-50 px-4 py-2 text-xs text-slate-500">Map — Use +/- to zoom. Suggested places appear as numbered markers.</p>
-              <div className="h-[400px]">
-                <MapWithRoute
-                coordinates={currentRoute.coordinates}
-                places={suggestions
-                  .filter((s): s is Suggestion & { lat: number; lon: number } => s.lat != null && s.lon != null)
-                  .map((s, i) => ({ name: s.name, lat: s.lat!, lon: s.lon!, category: s.category, number: i + 1 }))}
-                />
-              </div>
-            </div>
 
-            <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-slate-800">Suggest places along the way</h3>
-              <p className="mt-1 text-sm text-slate-600">
-                Choose categories (Food, Sights, etc.)—places matching <strong>any</strong> selected category will appear. Optionally narrow with subcategories (e.g. Italian, Museums), pick how far off-route you&apos;re willing to go, then click &quot;Get suggestions&quot; for AI-powered stops. Each place shows estimated detour time.
-              </p>
-
-              <div className="mt-5 flex flex-wrap items-center gap-6">
-                <div>
-                  <label className="block text-xs font-medium uppercase tracking-wider text-slate-500">How far off route?</label>
-                  <select
-                    value={maxDeviationMinutes}
-                    onChange={(e) => setMaxDeviationMinutes(Number(e.target.value))}
-                    className="mt-1 rounded-lg border border-slate-300/80 bg-white px-3 py-2 text-sm text-slate-800"
-                  >
-                    <option value={15}>15 min</option>
-                    <option value={30}>30 min</option>
-                    <option value={45}>45 min</option>
-                    <option value={60}>1 hour</option>
-                    <option value={90}>1.5 hours</option>
-                    <option value={120}>2 hours</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-medium uppercase tracking-wider text-slate-500">How many?</label>
-                  <select
-                    value={numPlaces}
-                    onChange={(e) => setNumPlaces(Number(e.target.value))}
-                    className="mt-1 rounded-lg border border-slate-300/80 bg-white px-3 py-2 text-sm text-slate-800"
-                  >
-                    {[3, 5, 7, 10].map((n) => (
-                      <option key={n} value={n}>{n} places</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="w-full">
-                  <span className="block text-xs font-medium uppercase tracking-wider text-slate-500">Categories</span>
-                  <div className="mt-1.5 space-y-2">
-                    {SUGGESTION_CATEGORIES.map((cat) => (
-                      <div key={cat}>
-                        <label className="flex cursor-pointer items-center gap-1.5">
-                          <input
-                            type="checkbox"
-                            checked={selectedCategories.includes(cat)}
-                            onChange={() => toggleCategory(cat)}
-                            className="rounded border-slate-300"
-                          />
-                          <span className="text-sm text-slate-700">{cat}</span>
-                        </label>
-                        {selectedCategories.includes(cat) && SUBCATEGORIES[cat] && (
-                          <div className="ml-5 mt-2 rounded-lg border border-slate-200 bg-slate-50/50 p-3">
-                            <div className="mb-3">
-                              <span className="mb-2 block text-xs font-medium text-slate-500">Budget (per stop)</span>
-                              <BudgetRangeSlider
-                                minVal={budgetByCategory[cat]?.min ?? 0}
-                                maxVal={budgetByCategory[cat]?.max ?? 500}
-                                onChange={(min, max) => setCategoryBudget(cat, min, max)}
-                              />
-                            </div>
-                            {cat === "Food" && (
+                  <div>
+                    <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">Categories</p>
+                    <div className="space-y-2">
+                      {SUGGESTION_CATEGORIES.map((cat) => (
+                        <div key={cat}>
+                          <label className="flex cursor-pointer items-center gap-2">
+                            <input
+                              type="checkbox"
+                              checked={selectedCategories.includes(cat)}
+                              onChange={() => toggleCategory(cat)}
+                              className="rounded border-slate-300 accent-slate-900"
+                            />
+                            <span className="text-sm text-slate-700">{cat}</span>
+                          </label>
+                          {selectedCategories.includes(cat) && SUBCATEGORIES[cat] && (
+                            <div className="ml-6 mt-2 rounded-xl border border-slate-200 bg-slate-50/60 p-4">
                               <div className="mb-3">
-                                <span className="mb-1.5 block text-xs font-medium text-slate-500">Quick picks</span>
-                                <div className="flex flex-wrap gap-1.5">
-                                  {FOOD_QUICK_PICKS.map((pick) => (
-                                    <button
-                                      key={pick}
-                                      type="button"
-                                      onClick={() => toggleSubcategory(cat, pick)}
-                                      className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors ${
-                                        selectedSubcategories[cat]?.includes(pick)
-                                          ? "bg-slate-800 text-white"
-                                          : "bg-white border border-slate-300 text-slate-700 hover:bg-slate-100"
-                                      }`}
-                                    >
-                                      {pick}
-                                    </button>
-                                  ))}
+                                <span className="mb-2 block text-xs font-medium text-slate-500">Budget (per stop)</span>
+                                <BudgetRangeSlider
+                                  minVal={budgetByCategory[cat]?.min ?? 0}
+                                  maxVal={budgetByCategory[cat]?.max ?? 500}
+                                  onChange={(min, max) => setCategoryBudget(cat, min, max)}
+                                />
+                              </div>
+                              {cat === "Food" && (
+                                <div className="mb-3">
+                                  <span className="mb-1.5 block text-xs font-medium text-slate-500">Quick picks</span>
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {FOOD_QUICK_PICKS.map((pick) => (
+                                      <button
+                                        key={pick}
+                                        type="button"
+                                        onClick={() => toggleSubcategory(cat, pick)}
+                                        className={`rounded-full px-3 py-1 text-xs font-medium transition-all duration-150 ${
+                                          selectedSubcategories[cat]?.includes(pick)
+                                            ? "bg-slate-900 text-white"
+                                            : "border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50"
+                                        }`}
+                                      >
+                                        {pick}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                              <div className="mb-2 flex items-center gap-2">
+                                <input
+                                  type="text"
+                                  placeholder={`Search ${cat.toLowerCase()} types (e.g. pi→Pizza, bu→Burger)...`}
+                                  value={subcategorySearch[cat] ?? ""}
+                                  onChange={(e) => setSubcategorySearch((prev) => ({ ...prev, [cat]: e.target.value }))}
+                                  className="h-8 flex-1 rounded-lg border border-slate-200 bg-white px-3 text-sm transition-all duration-150 hover:border-slate-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                                />
+                                <div className="flex shrink-0 gap-1">
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      setSelectedSubcategories((prev) => ({
+                                        ...prev,
+                                        [cat]: SUBCATEGORIES[cat].filter((s) =>
+                                          (subcategorySearch[cat] ?? "")
+                                            .toLowerCase()
+                                            .split(" ")
+                                            .every((q) => s.toLowerCase().includes(q))
+                                        ),
+                                      }))
+                                    }
+                                    className="h-8 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-medium text-slate-600 transition-all duration-150 hover:border-slate-300 hover:bg-slate-50"
+                                  >
+                                    All
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => setSelectedSubcategories((prev) => ({ ...prev, [cat]: [] }))}
+                                    className="h-8 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-medium text-slate-600 transition-all duration-150 hover:border-slate-300 hover:bg-slate-50"
+                                  >
+                                    Clear
+                                  </button>
                                 </div>
                               </div>
-                            )}
-                            <div className="mb-2 flex items-center gap-2">
-                              <input
-                                type="text"
-                                placeholder={`Search ${cat.toLowerCase()} types (e.g. pi→Pizza, bu→Burger)...`}
-                                value={subcategorySearch[cat] ?? ""}
-                                onChange={(e) => setSubcategorySearch((prev) => ({ ...prev, [cat]: e.target.value }))}
-                                className="flex-1 rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
-                              />
-                              <div className="flex shrink-0 gap-1">
+                              <div className="max-h-32 space-y-1 overflow-auto">
+                                {SUBCATEGORIES[cat]
+                                  .filter((s) =>
+                                    (subcategorySearch[cat] ?? "")
+                                      .toLowerCase()
+                                      .split(" ")
+                                      .every((q) => s.toLowerCase().includes(q))
+                                  )
+                                  .map((sub) => (
+                                    <label key={sub} className="flex cursor-pointer items-center gap-1.5">
+                                      <input
+                                        type="checkbox"
+                                        checked={selectedSubcategories[cat]?.includes(sub)}
+                                        onChange={() => toggleSubcategory(cat, sub)}
+                                        className="rounded border-slate-300 accent-slate-900"
+                                      />
+                                      <span className="text-sm text-slate-600">{sub}</span>
+                                    </label>
+                                  ))}
+                              </div>
+                              <div className="mt-3 flex items-center gap-2 border-t border-slate-200 pt-3">
+                                <input
+                                  type="text"
+                                  placeholder="Or type custom (wings, pho, doughnuts…)"
+                                  value={customSubcategoryInput[cat] ?? ""}
+                                  onChange={(e) => setCustomSubcategoryInput((prev) => ({ ...prev, [cat]: e.target.value }))}
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                      e.preventDefault();
+                                      addCustomSubcategory(cat);
+                                    }
+                                  }}
+                                  className="h-8 flex-1 rounded-lg border border-slate-200 bg-white px-3 text-sm transition-all duration-150 hover:border-slate-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                                />
                                 <button
                                   type="button"
-                                  onClick={() =>
-                                    setSelectedSubcategories((prev) => ({
-                                      ...prev,
-                                      [cat]: SUBCATEGORIES[cat].filter((s) =>
-                                        (subcategorySearch[cat] ?? "")
-                                          .toLowerCase()
-                                          .split(" ")
-                                          .every((q) => s.toLowerCase().includes(q))
-                                      ),
-                                    }))
-                                  }
-                                  className="rounded border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                                  onClick={() => addCustomSubcategory(cat)}
+                                  className="h-8 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-medium text-slate-600 transition-all duration-150 hover:border-slate-300 hover:bg-slate-50"
                                 >
-                                  All
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setSelectedSubcategories((prev) => ({ ...prev, [cat]: [] }))
-                                  }
-                                  className="rounded border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50"
-                                >
-                                  Clear
+                                  Add
                                 </button>
                               </div>
-                            </div>
-                            <div className="max-h-32 overflow-auto">
-                              {SUBCATEGORIES[cat]
-                                .filter((s) =>
-                                  (subcategorySearch[cat] ?? "")
-                                    .toLowerCase()
-                                    .split(" ")
-                                    .every((q) => s.toLowerCase().includes(q))
-                                )
-                                .map((sub) => (
-                                  <label key={sub} className="mb-1 flex cursor-pointer items-center gap-1.5">
-                                    <input
-                                      type="checkbox"
-                                      checked={selectedSubcategories[cat]?.includes(sub)}
-                                      onChange={() => toggleSubcategory(cat, sub)}
-                                      className="rounded border-slate-300"
-                                    />
-                                    <span className="text-sm text-slate-600">{sub}</span>
-                                  </label>
-                                ))}
-                            </div>
-                            <div className="mt-3 flex items-center gap-2 border-t border-slate-200 pt-3">
-                              <input
-                                type="text"
-                                placeholder="Or type custom (wings, pho, doughnuts…)"
-                                value={customSubcategoryInput[cat] ?? ""}
-                                onChange={(e) => setCustomSubcategoryInput((prev) => ({ ...prev, [cat]: e.target.value }))}
-                                onKeyDown={(e) => {
-                                  if (e.key === "Enter") {
-                                    e.preventDefault();
-                                    addCustomSubcategory(cat);
-                                  }
-                                }}
-                                className="flex-1 rounded-lg border border-slate-200 px-2 py-1.5 text-sm"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => addCustomSubcategory(cat)}
-                                className="rounded border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50"
-                              >
-                                Add
-                              </button>
-                            </div>
-                            {(selectedSubcategories[cat]?.length ?? 0) > 0 && (
-                              <div className="mt-2 flex flex-wrap gap-1">
-                                {selectedSubcategories[cat]?.map((sub) => (
-                                  <span
-                                    key={sub}
-                                    className="inline-flex items-center gap-1 rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-800"
-                                  >
-                                    {sub}
-                                    <button
-                                      type="button"
-                                      onClick={() => removeSubcategory(cat, sub)}
-                                      className="ml-0.5 -mr-0.5 rounded-full p-0.5 hover:bg-slate-300"
-                                      aria-label={`Remove ${sub}`}
+                              {(selectedSubcategories[cat]?.length ?? 0) > 0 && (
+                                <div className="mt-2 flex flex-wrap gap-1">
+                                  {selectedSubcategories[cat]?.map((sub) => (
+                                    <span
+                                      key={sub}
+                                      className="inline-flex items-center gap-1 rounded-full bg-slate-200 px-2.5 py-0.5 text-xs font-medium text-slate-800"
                                     >
-                                      ×
-                                    </button>
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                                      {sub}
+                                      <button
+                                        type="button"
+                                        onClick={() => removeSubcategory(cat, sub)}
+                                        className="ml-0.5 -mr-0.5 rounded-full p-0.5 hover:bg-slate-300"
+                                        aria-label={`Remove ${sub}`}
+                                      >
+                                        ×
+                                      </button>
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleSuggestionsRequest}
-                  disabled={suggestionsLoading || selectedCategories.length === 0}
-                  className="rounded-xl bg-slate-800 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-slate-700 disabled:opacity-50"
-                >
-                  {suggestionsLoading ? "Generating…" : "Get suggestions"}
-                </button>
-              </div>
 
-              {suggestionsLoading && (
-                <div className="mt-4 space-y-2">
-                  <p className="text-sm font-medium text-slate-700">{suggestionsStage}</p>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200">
-                    <div
-                      className="h-full rounded-full bg-slate-700 transition-all duration-300 ease-out"
-                      style={{ width: `${suggestionsProgress}%` }}
-                    />
+                  <button
+                    type="button"
+                    onClick={handleSuggestionsRequest}
+                    disabled={suggestionsLoading || selectedCategories.length === 0}
+                    className="h-10 rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-800 shadow-sm transition-all duration-150 hover:-translate-y-px hover:border-slate-300 hover:bg-slate-50 hover:shadow-md active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {suggestionsLoading ? "Generating…" : "Get suggestions"}
+                  </button>
+                </div>
+
+                {suggestionsLoading && (
+                  <div className="mt-5 space-y-2">
+                    <p className="text-sm font-medium text-slate-700">{suggestionsStage}</p>
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+                      <div
+                        className="h-full rounded-full bg-slate-900 transition-all duration-300 ease-out"
+                        style={{ width: `${suggestionsProgress}%` }}
+                      />
+                    </div>
+                    <p className="text-xs text-slate-400">Usually takes 20–30 seconds. Hang tight!</p>
                   </div>
-                  <p className="text-xs text-slate-500">
-                    Usually takes 20–30 seconds. Hang tight!
-                  </p>
-                </div>
-              )}
-              {suggestionsNeedsSetup && (
-                <p className="mt-4 rounded-lg bg-slate-100 border border-slate-200 p-4 text-sm text-slate-700">
-                  Suggestions are temporarily unavailable.
-                </p>
-              )}
-              {suggestionsError && (
-                <p className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">{suggestionsError}</p>
-              )}
+                )}
+                {suggestionsNeedsSetup && (
+                  <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+                    Suggestions are temporarily unavailable.
+                  </div>
+                )}
+                {suggestionsError && (
+                  <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">{suggestionsError}</div>
+                )}
 
-              {suggestions.length > 0 && (
-                <>
-                <p className="mt-6 rounded-lg bg-slate-100 border border-slate-200 px-4 py-3 text-sm text-slate-700">
-                  Share your journey with <span className="font-semibold text-slate-800">#stillrio</span> and <span className="font-semibold text-slate-800">#berio</span> on social!
-                </p>
-                <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                  {suggestions.map((s, i) => (
-                    <div
-                      key={i}
-                      className="relative overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-sm"
-                    >
-                      <div className="absolute right-3 bottom-3 z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-800 text-xs font-bold text-white shadow-md">
-                        {i + 1}
-                      </div>
-                      <a
-                        href={s.url ?? `https://www.google.com/search?q=${encodeURIComponent(`${s.name} ${s.location}`)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block aspect-video w-full overflow-hidden bg-gradient-to-br from-slate-200 to-slate-300"
-                      >
-                        {s.imageUrl ? (
-                          <img
-                            src={s.imageUrl}
-                            alt={s.name}
-                            className="h-full w-full object-cover transition-transform hover:scale-105"
-                          />
-                        ) : (
-                          <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-4 text-center text-slate-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <span className="text-sm font-medium">View on Google</span>
-                            <span className="text-xs">Add GOOGLE_PLACES_API_KEY to .env.local for photos</span>
-                          </div>
-                        )}
-                      </a>
-                      <div className="p-4">
-                        <div className="flex items-start justify-between gap-2">
-                          <div>
-                            <p className="font-semibold text-slate-800">{s.name}</p>
-                            <p className="text-xs font-medium uppercase text-slate-500">{s.category} · {s.location}</p>
+                {suggestions.length > 0 && (
+                  <>
+                    <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                      Share your journey with <span className="font-semibold text-slate-800">#stillrio</span> and <span className="font-semibold text-slate-800">#berio</span> on social!
+                    </div>
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                      {suggestions.map((s, i) => (
+                        <div
+                          key={i}
+                          className="relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm transition-shadow duration-150 hover:shadow-md"
+                        >
+                          <div className="absolute bottom-3 right-3 z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-900 text-[10px] font-bold text-white shadow">
+                            {i + 1}
                           </div>
                           <a
                             href={s.url ?? `https://www.google.com/search?q=${encodeURIComponent(`${s.name} ${s.location}`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="shrink-0 rounded-lg bg-slate-100 px-2 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-200"
+                            className="block aspect-video w-full overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200"
                           >
-                            {s.url ? "View on Google" : "Search on Google"}
+                            {s.imageUrl ? (
+                              <img
+                                src={s.imageUrl}
+                                alt={s.name}
+                                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-4 text-center text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <span className="text-sm font-medium">View on Google</span>
+                                <span className="text-xs">Add GOOGLE_PLACES_API_KEY to .env.local for photos</span>
+                              </div>
+                            )}
                           </a>
+                          <div className="p-4">
+                            <div className="flex items-start justify-between gap-2">
+                              <div>
+                                <p className="font-semibold text-slate-900">{s.name}</p>
+                                <p className="text-xs font-medium uppercase tracking-wide text-slate-400">{s.category} · {s.location}</p>
+                              </div>
+                              <a
+                                href={s.url ?? `https://www.google.com/search?q=${encodeURIComponent(`${s.name} ${s.location}`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="shrink-0 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 transition-all duration-150 hover:border-slate-300 hover:bg-slate-50"
+                              >
+                                {s.url ? "View on Google" : "Search"}
+                              </a>
+                            </div>
+                            <p className="mt-2 text-sm leading-relaxed text-slate-500">{s.description}</p>
+                            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+                              {s.lat != null && s.lon != null && result && (
+                                <p className="text-xs font-medium text-slate-600">
+                                  +{formatDetourRange(estimateDetourMinutes(distanceToRouteKm(s.lat, s.lon, currentRoute.coordinates), mode))} detour
+                                </p>
+                              )}
+                              {s.rating != null && s.userRatingsTotal != null && (
+                                <p className="flex items-center gap-1 text-xs text-amber-600">
+                                  <span>★</span>
+                                  <span className="font-medium">{s.rating.toFixed(1)}</span>
+                                  <span className="text-slate-400">({s.userRatingsTotal.toLocaleString()} reviews)</span>
+                                </p>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                        <p className="mt-2 text-sm text-slate-600">{s.description}</p>
-                        <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1">
-                            {s.lat != null && s.lon != null && result && (
-                            <p className="text-sm font-medium text-slate-600">
-                              +{formatDetourRange(estimateDetourMinutes(distanceToRouteKm(s.lat, s.lon, currentRoute.coordinates), mode))} detour
-                            </p>
-                          )}
-                          {s.rating != null && s.userRatingsTotal != null && (
-                            <p className="flex items-center gap-1 text-sm text-amber-600">
-                              <span>★</span>
-                              <span className="font-medium">{s.rating.toFixed(1)}</span>
-                              <span className="text-slate-500">({s.userRatingsTotal.toLocaleString()} reviews)</span>
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                      ))}
                     </div>
-                    ))}
-                </div>
-                </>
-              )}
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-        );
+          );
         })()}
       </div>
     </section>

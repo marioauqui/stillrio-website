@@ -3,12 +3,12 @@ export default function TickerBanner({
 }: {
   text?: string;
 }) {
-  const repeated = `${text}   •   `.repeat(8);
+  const repeated = `${text}   •   `.repeat(12);
   return (
-    <div className="overflow-hidden border-b border-slate-700 bg-slate-800 py-2.5 text-sm font-bold tracking-wide text-white">
+    <div className="overflow-hidden border-b border-slate-700 bg-slate-800 py-2 text-sm font-bold tracking-wide text-white sm:py-2.5">
       <div className="flex animate-ticker whitespace-nowrap">
-        <span className="px-8">{repeated}</span>
-        <span className="px-8" aria-hidden>
+        <span className="px-4 sm:px-8">{repeated}</span>
+        <span className="px-4 sm:px-8" aria-hidden>
           {repeated}
         </span>
       </div>
