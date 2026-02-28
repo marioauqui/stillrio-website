@@ -6,9 +6,37 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "StillRio | Creator HQ & Adventure Planner",
-  description:
-    "StillRio — Your creator hub. Explore content, connect on YouTube, TikTok & Instagram, and plan real adventures with our interactive route planner.",
+  metadataBase: new URL("https://stillrio.com"),
+
+  title: "StillRio — Creator & Explorer",
+  description: "Plan the drive. Find what's along the way.",
+
+  alternates: {
+    canonical: "https://stillrio.com",
+  },
+
+  openGraph: {
+    title: "StillRio — Creator & Explorer",
+    description: "Plan the drive. Find what's along the way.",
+    url: "https://stillrio.com",
+    siteName: "StillRio",
+    type: "website",
+    images: [
+      {
+        url: "https://stillrio.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "StillRio — Creator & Explorer",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "StillRio — Creator & Explorer",
+    description: "Plan the drive. Find what's along the way.",
+    images: ["https://stillrio.com/og-image.png"],
+  },
 };
 
 export default function RootLayout({
