@@ -54,6 +54,9 @@ const SUGGESTION_CATEGORIES = ["Activities", "Food", "Sights", "Nature", "Cultur
 const BUDGET_OPTIONS = [0, 10, 25, 50, 100, 200, 500] as const;
 const BUDGET_LABELS = ["$0", "$10", "$25", "$50", "$100", "$200", "$500+"];
 
+// Minimum index gap between the two handles to prevent overlap
+const MIN_HANDLE_GAP = 1;
+
 function BudgetRangeSlider({
   minVal,
   maxVal,
@@ -97,14 +100,16 @@ function BudgetRangeSlider({
       if (draggingRef.current === null) return;
       const idx = pxToIdx(e.clientX);
       if (draggingRef.current === "min") {
-        const newMin = Math.min(idx, safeMax);
+        // Clamp: can't cross max handle, must keep MIN_HANDLE_GAP
+        const newMin = Math.max(0, Math.min(idx, safeMax - MIN_HANDLE_GAP));
         onChange(BUDGET_OPTIONS[newMin], BUDGET_OPTIONS[safeMax]);
       } else {
-        const newMax = Math.max(idx, safeMin);
+        // Clamp: can't cross min handle, must keep MIN_HANDLE_GAP
+        const newMax = Math.min(n, Math.max(idx, safeMin + MIN_HANDLE_GAP));
         onChange(BUDGET_OPTIONS[safeMin], BUDGET_OPTIONS[newMax]);
       }
     },
-    [safeMin, safeMax, pxToIdx, onChange]
+    [safeMin, safeMax, n, pxToIdx, onChange]
   );
 
   const handlePointerUp = useCallback(() => {
@@ -114,28 +119,43 @@ function BudgetRangeSlider({
   const minPct = (safeMin / n) * 100;
   const maxPct = (safeMax / n) * 100;
 
+  const handleBase =
+    "absolute top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-grab rounded-full border-2 border-white bg-slate-800 shadow-sm active:cursor-grabbing focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 transition-shadow duration-150";
+
+  // Larger hit area via pseudo-element approach: use a bigger touch-target wrapper
+  const handleStyle = (pct: number, isActive: boolean) => ({
+    left: `calc(8px + (100% - 16px) * ${pct} / 100)`,
+    // Active handle rises above the other
+    zIndex: isActive ? 30 : 20,
+  });
+
   return (
     <div className="w-full">
       <div
         ref={trackRef}
-        className="relative h-8 px-1 select-none touch-none"
+        className="relative h-10 select-none touch-none"
+        style={{ padding: "0 8px" }}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
       >
+        {/* Track background */}
         <div className="absolute top-1/2 left-2 right-2 h-1.5 -translate-y-1/2 overflow-hidden rounded-full bg-slate-200">
           <div
-            className="absolute top-0 bottom-0 rounded-full bg-slate-600"
+            className="absolute top-0 bottom-0 rounded-full bg-slate-700 transition-all duration-75"
             style={{
               left: `${minPct}%`,
               width: `${maxPct - minPct}%`,
             }}
           />
         </div>
+
+        {/* Min handle */}
         <div
           role="slider"
+          aria-label="Minimum budget"
           aria-valuemin={0}
-          aria-valuemax={n}
+          aria-valuemax={safeMax - MIN_HANDLE_GAP}
           aria-valuenow={safeMin}
           tabIndex={0}
           onPointerDown={handlePointerDown("min")}
@@ -148,16 +168,19 @@ function BudgetRangeSlider({
               onChange(BUDGET_OPTIONS[newMin], BUDGET_OPTIONS[safeMax]);
             } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
               e.preventDefault();
-              const newMin = Math.min(safeMax, safeMin + 1);
+              const newMin = Math.min(safeMax - MIN_HANDLE_GAP, safeMin + 1);
               onChange(BUDGET_OPTIONS[newMin], BUDGET_OPTIONS[safeMax]);
             }
           }}
-          className="absolute top-1/2 z-10 h-4 w-4 -translate-x-1/2 -translate-y-1/2 cursor-grab rounded-full border-2 border-white bg-slate-800 shadow-md active:cursor-grabbing focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
-          style={{ left: `calc(8px + (100% - 16px) * ${minPct} / 100)` }}
+          className={`${handleBase} h-5 w-5`}
+          style={handleStyle(minPct, draggingRef.current === "min")}
         />
+
+        {/* Max handle */}
         <div
           role="slider"
-          aria-valuemin={0}
+          aria-label="Maximum budget"
+          aria-valuemin={safeMin + MIN_HANDLE_GAP}
           aria-valuemax={n}
           aria-valuenow={safeMax}
           tabIndex={0}
@@ -167,7 +190,7 @@ function BudgetRangeSlider({
           onKeyDown={(e) => {
             if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
               e.preventDefault();
-              const newMax = Math.max(safeMin, safeMax - 1);
+              const newMax = Math.max(safeMin + MIN_HANDLE_GAP, safeMax - 1);
               onChange(BUDGET_OPTIONS[safeMin], BUDGET_OPTIONS[newMax]);
             } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
               e.preventDefault();
@@ -175,8 +198,8 @@ function BudgetRangeSlider({
               onChange(BUDGET_OPTIONS[safeMin], BUDGET_OPTIONS[newMax]);
             }
           }}
-          className="absolute top-1/2 z-10 h-4 w-4 -translate-x-1/2 -translate-y-1/2 cursor-grab rounded-full border-2 border-white bg-slate-800 shadow-md active:cursor-grabbing focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
-          style={{ left: `calc(8px + (100% - 16px) * ${maxPct} / 100)` }}
+          className={`${handleBase} h-5 w-5`}
+          style={handleStyle(maxPct, draggingRef.current === "max")}
         />
       </div>
       <div className="mt-1 flex justify-between text-xs text-slate-500">
