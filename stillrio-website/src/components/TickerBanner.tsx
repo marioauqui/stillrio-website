@@ -1,5 +1,5 @@
 export default function TickerBanner({
-  text = "short content coming out march 2nd stay tuned",
+  text = "short content coming soon — sorry for the delay",
 }: {
   text?: string;
 }) {
