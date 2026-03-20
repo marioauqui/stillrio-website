@@ -31,7 +31,7 @@ export default function TopTracks() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
 
-    fetch(`/api/spotify-top-tracks?range=${range}&limit=8`, { signal: controller.signal })
+    fetch(`/api/spotify-top-tracks?range=${range}&limit=10`, { signal: controller.signal })
       .then((res) => {
         if (!mounted) return res;
         if (res.status === 503) {
@@ -110,7 +110,7 @@ export default function TopTracks() {
           {header}
           {rangeTabs(true)}
           <div className="mt-5 space-y-2">
-            {[...Array(8)].map((_, i) => (
+            {[...Array(10)].map((_, i) => (
               <div key={i} className="flex items-center gap-3 py-2">
                 <span className="w-7 text-xs text-slate-300">• {i + 1}</span>
                 <div className="h-10 w-10 flex-shrink-0 animate-pulse rounded-lg bg-slate-200" />
